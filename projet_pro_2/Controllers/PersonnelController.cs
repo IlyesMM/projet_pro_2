@@ -10,6 +10,21 @@ namespace projet_pro_2.Controllers
     {
         private BddManager bddManager = BddManager.GetInstance("votre_chaine_de_connexion");
 
+        public ActionResult Index()
+        {
+            var personnels = bddManager.ReqSelect("SELECT * FROM personnel").Select(row => new Personnel
+            {
+                idpersonnel = (int)row[0],
+                nom = row[1].ToString(),
+                prenom = row[2].ToString(),
+                tel = row[3].ToString(),
+                mail = row[4].ToString(),
+                idservice = (int)row[5]
+            }).ToList();
+
+            return View(personnels);
+        }
+
         public ActionResult Create()
         {
             return View();
@@ -31,16 +46,6 @@ namespace projet_pro_2.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(int id)
-        {
-            string query = "DELETE FROM personnel WHERE idpersonnel = @Id";
-            var parameters = new Dictionary<string, object>
-    {
-        {"@Id", id}
-    };
-            bddManager.ReqUpdate(query, parameters);
-            return RedirectToAction("Index");
-        }
         public ActionResult Edit(int id)
         {
             var personnel = bddManager.ReqSelect("SELECT * FROM personnel WHERE idpersonnel = @Id", new Dictionary<string, object> { { "@Id", id } })
@@ -51,7 +56,7 @@ namespace projet_pro_2.Controllers
                                            prenom = row[2].ToString(),
                                            tel = row[3].ToString(),
                                            mail = row[4].ToString(),
-                                           idservice = Convert.ToInt32(row[5])
+                                           idservice = (int)row[5]
                                        }).FirstOrDefault();
 
             return View(personnel);
@@ -62,18 +67,27 @@ namespace projet_pro_2.Controllers
         {
             string query = "UPDATE personnel SET nom = @Nom, prenom = @Prenom, tel = @Tel, mail = @Mail, idservice = @idservice WHERE idpersonnel = @Id";
             var parameters = new Dictionary<string, object>
-    {
-        {"@Id", id},
-        {"@Nom", nom},
-        {"@Prenom", prenom},
-        {"@Tel", tel},
-        {"@Mail", mail},
-        {"@idservice", idservice}
-    };
+            {
+                {"@Id", id},
+                {"@Nom", nom},
+                {"@Prenom", prenom},
+                {"@Tel", tel},
+                {"@Mail", mail},
+                {"@idservice", idservice}
+            };
             bddManager.ReqUpdate(query, parameters);
             return RedirectToAction("Index");
         }
 
-
+        public ActionResult Delete(int id)
+        {
+            string query = "DELETE FROM personnel WHERE idpersonnel = @Id";
+            var parameters = new Dictionary<string, object>
+            {
+                {"@Id", id}
+            };
+            bddManager.ReqUpdate(query, parameters);
+            return RedirectToAction("Index");
+        }
     }
 }
