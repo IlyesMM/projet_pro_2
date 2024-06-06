@@ -26,6 +26,6 @@ namespace projet_pro_2.Models
         public string Mail { get; set; }
 
         [Required]
-        public string Service { get; set; }
+        public string IdService { get; set; }
     }
 }

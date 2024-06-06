@@ -1,65 +1,50 @@
-﻿@{
-    ViewData["Title"] = "Connexion";
-}
+﻿@model projet_pro_2.Models.LoginViewModel
 
-<div class="login-container">
-    <h2>Connexion</h2>
-    <form method="post" action="/Account/Login">
-        <div class="form-group">
-            <label for="login">Login</label>
-            <input type="text" id="login" name="login" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Se connecter</button>
-    </form>
-</div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Se Connecter</title>
+    <link rel="stylesheet" href="~/Content/Site.css">
+</head>
+<body>
+    <header>
+        <h1>Se Connecter</h1>
+    </header>
+    <main>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-<style>
-    .login-container {
-        width: 300px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
-    }
+            <div class="form-horizontal">
+                <h4>Login</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Se Connecter" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
         }
-
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-
-    .btn {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-</style>
+    </main>
+</body>
+</html>

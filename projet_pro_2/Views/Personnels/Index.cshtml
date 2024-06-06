@@ -1,20 +1,18 @@
-﻿@model IEnumerable<PersonnelManagement.Models.Personnel>
+﻿@model IEnumerable<projet_pro_2.Models.Personnel>
 
 @{
-    ViewData["Title"] = "Liste des Personnels";
+    ViewBag.Title = "Liste du Personnel";
 }
 
-<h2>Liste des Personnels</h2>
-<p>
-    <a asp-action="Create" class="btn btn-primary">Ajouter un nouveau personnel</a>
-</p>
+<h2>Liste du Personnel</h2>
+
 <table class="table">
     <thead>
         <tr>
             <th>Nom</th>
             <th>Prénom</th>
             <th>Téléphone</th>
-            <th>Email</th>
+            <th>Mail</th>
             <th>Service</th>
             <th>Actions</th>
         </tr>
@@ -27,12 +25,17 @@
                 <td>@personnel.Prenom</td>
                 <td>@personnel.Tel</td>
                 <td>@personnel.Mail</td>
-                <td>@personnel.Service</td>
+                <td>@personnel.IdService</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@personnel.Id" class="btn btn-secondary">Modifier</a>
-                    <a asp-action="Delete" asp-route-id="@personnel.Id" class="btn btn-danger">Supprimer</a>
+                    @Html.ActionLink("Edit", "Edit", new { id = personnel.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = personnel.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = personnel.Id })
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<p>
+    @Html.ActionLink("Ajouter un Personnel", "Create")
+</p>

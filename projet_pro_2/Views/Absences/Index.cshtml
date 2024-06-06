@@ -1,0 +1,44 @@
+﻿@model IEnumerable<projet_pro_2.Models.Absence>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Absences</title>
+    <link rel="stylesheet" href="~/Content/Site.css">
+</head>
+<body>
+    <header>
+        <h1>Liste des Absences</h1>
+    </header>
+    <main>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Personnel</th>
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
+                    <th>Motif</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var absence in Model)
+                {
+                    <tr>
+                        <td>@absence.idpersonnel</td>
+                        <td>@absence.datedebut.ToShortDateString()</td>
+                        <td>@absence.datefin.ToShortDateString()</td>
+                        <td>@absence.idmotif</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = absence.idpersonnel, date = absence.datedebut }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = absence.idpersonnel, date = absence.datedebut })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
