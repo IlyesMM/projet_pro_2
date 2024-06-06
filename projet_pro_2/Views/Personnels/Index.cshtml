@@ -1,41 +1,46 @@
 ﻿@model IEnumerable<projet_pro_2.Models.Personnel>
 
-@{
-    ViewBag.Title = "Liste du Personnel";
-}
-
-<h2>Liste du Personnel</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Téléphone</th>
-            <th>Mail</th>
-            <th>Service</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var personnel in Model)
-        {
-            <tr>
-                <td>@personnel.Nom</td>
-                <td>@personnel.Prenom</td>
-                <td>@personnel.Tel</td>
-                <td>@personnel.Mail</td>
-                <td>@personnel.IdService</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = personnel.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = personnel.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = personnel.Id })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<p>
-    @Html.ActionLink("Ajouter un Personnel", "Create")
-</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Personnels</title>
+    <link rel="stylesheet" href="~/Content/Site.css">
+</head>
+<body>
+    <header>
+        <h1>Liste des Personnels</h1>
+    </header>
+    <main>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Téléphone</th>
+                    <th>Mail</th>
+                    <th>Service</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var personnel in Model)
+                {
+                    <tr>
+                        <td>@personnel.nom</td>
+                        <td>@personnel.prenom</td>
+                        <td>@personnel.tel</td>
+                        <td>@personnel.mail</td>
+                        <td>@personnel.idservice</td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = personnel.idpersonnel }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = personnel.idpersonnel })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
