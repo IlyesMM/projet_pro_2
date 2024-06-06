@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 
 namespace projet_pro_2.Models
+
 {
     public class Personnel
     {
