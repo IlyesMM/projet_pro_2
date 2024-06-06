@@ -1,0 +1,48 @@
+﻿@model PersonnelManagement.Models.Personnel
+
+@{
+    ViewData["Title"] = "Ajouter un nouveau Personnel";
+}
+
+<h2>Ajouter un nouveau Personnel</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Nom" class="control-label"></label>
+        <input asp-for="Nom" class="form-control" />
+        <span asp-validation-for="Nom" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Prenom" class="control-label"></label>
+        <input asp-for="Prenom" class="form-control" />
+        <span asp-validation-for="Prenom" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tel" class="control-label"></label>
+        <input asp-for="Tel" class="form-control" />
+        <span asp-validation-for="Tel" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Mail" class="control-label"></label>
+        <input asp-for="Mail" class="form-control" />
+        <span asp-validation-for="Mail" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Service" class="control-label"></label>
+        <input asp-for="Service" class="form-control" />
+        <span asp-validation-for="Service" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Enregistrer" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Retour à la liste</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
